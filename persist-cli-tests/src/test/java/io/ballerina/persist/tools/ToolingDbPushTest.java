@@ -124,4 +124,23 @@ public class ToolingDbPushTest {
         assertGeneratedSources("tool_test_db_push_5", DB_PUSH);
         assertCreateDatabaseTables("tool_test_db_push_5", tables);
     }
+
+    @Test
+    @Description("Two entities with one to one relation")
+    public void testDbPushOneToOne() {
+        ArrayList<PersistTable> tables = new ArrayList<>();
+        tables.add(
+                new PersistTable("Profiles", "id")
+                        .addColumn(new PersistTableColumn("id", sqlInt, no, no))
+                        .addColumn(new PersistTableColumn("name", sqlVarchar, no, no))
+                        .addColumn(new PersistTableColumn("userId", sqlInt, no, yes))
+        );
+        tables.add(
+                new PersistTable("Users", "id")
+                        .addColumn(new PersistTableColumn("id", sqlInt, no, no))
+                        .addColumn(new PersistTableColumn("name", sqlVarchar, no, no))
+        );
+        assertGeneratedSources("tool_test_db_push_6", DB_PUSH);
+        assertCreateDatabaseTables("tool_test_db_push_6", tables);
+    }
 }
